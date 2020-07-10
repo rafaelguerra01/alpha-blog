@@ -1,0 +1,13 @@
+echo "select * from cp_consumer where id = (select cp_consumer_id from cp_consumer_facts where element = 'b5250000-0100-0200-0000-00000000006d');"|su - postgres -c "psql candlepin"
+echo "select * from cp_consumer_facts where cp_consumer_id = (select id from cp_consumer where name like '%prd-ht-h1-host-219.bbtnet.com%');"|su - postgres -c "psql candlepin"
+echo "select * from cp_consumer_hypervisor where hypervisor_id like '%prd-ht-h1-host-219.bbtnet.com%';"|su - postgres -c "psql candlepin"
+echo "select * from cp_consumer where id = (select consumer_id from cp_consumer_hypervisor where hypervisor_id like '%prd-ht-h1-host-219.bbtnet.com%');"| su - postgres -c "psql candlepin"
+
+
+2020-02-14 11:52:29,511 [thread=http-bio-8443-exec-4] [req=84d2f55e-1737-4bc1-a4db-b40aa39b780c, org=, csid=5a366455] INFO  org.candlepin.common.filter.LoggingFilter - Response: status=200, content-type="application/json", time=3
+2020-02-14 11:52:29,844 [thread=QuartzScheduler_Worker-5] [job=hypervisor_update_03574cf4-074e-4fda-b418-b0856be939fd, org=DefaultOrganization, csid=] WARN  org.hibernate.engine.jdbc.spi.SqlExceptionHelper - SQL Error: 0, SQLState: 23505
+2020-02-14 11:52:29,844 [thread=QuartzScheduler_Worker-5] [job=hypervisor_update_03574cf4-074e-4fda-b418-b0856be939fd, org=DefaultOrganization, csid=] ERROR org.hibernate.engine.jdbc.spi.SqlExceptionHelper - ERROR: duplicate key value violates unique constraint "cp_consumer_hypervisor_ukey"
+  Detail: Key (hypervisor_id, owner_id)=(testejoniel, 4028fa476c48306c016c4830d4640001) already exists.
+
+
+Null exception
