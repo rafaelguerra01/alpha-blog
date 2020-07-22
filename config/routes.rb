@@ -4,5 +4,9 @@ Rails.application.routes.draw do
     #get 'pages/about', to: 'pages#about'
     get 'about', to: 'pages#about'
     root :to => 'pages#home'
-    resources :articles, only: [:show] ##This will give all the articles routes that we need for articles
+    #resources :articles, only: [:show, :index, :new, :create, :edit, :update, :destroy] ##This will give all the articles routes that we need for articles or
+    resources :articles ##provide all the rest-ful resources for articles(routes rails resources)
+  #  get 'articles/:id/edit', to: 'articles#edit'
+#    patch 'articles/:id', to: 'articles#update'
+
 end
